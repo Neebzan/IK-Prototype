@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class InverseKinematics : MonoBehaviour
 {
-    public int numberOfSegments = 3;
-    public float segmentLength = 1.0f;
-    public float segmentWidth = .25f;
-    public Transform Target;
+    public int NumberOfSegments = 3;
+    public float SegmentLength = 1.0f;
+    public float SegmentWidth = .25f;
     public Segment SegmentPrefab;
-    public bool isAttached = false;
+    public Transform Target;
+    public bool IsAttached = false;
     public Transform attachmentPoint;
+    public bool UsingPole;
+    public Transform Pole;
+
 
     private Segment[] segments;
 
@@ -29,12 +32,11 @@ public class InverseKinematics : MonoBehaviour
 
     void Setup()
     {
-        segments = new Segment[numberOfSegments];
-        for (int i = 0; i < numberOfSegments; i++)
-        {
+        segments = new Segment[NumberOfSegments];
+        for (int i = 0; i < NumberOfSegments; i++) {
             segments[i] = Instantiate(SegmentPrefab).GetComponent<Segment>();
-            segments[i].Thickness = segmentWidth;
-            segments[i].Length = segmentLength;
+            segments[i].Thickness = SegmentWidth;
+            segments[i].Length = SegmentLength;
             if (i == 0)
                 segments[i].Target = Target;
 
@@ -47,10 +49,8 @@ public class InverseKinematics : MonoBehaviour
 
     void Reach()
     {
-        for (int i = 0; i < numberOfSegments; i++)
-        {
-            if (isAttached && i == numberOfSegments - 1)
-            {
+        for (int i = 0; i < NumberOfSegments; i++) {
+            if (IsAttached && i == NumberOfSegments - 1) {
                 segments[i].FollowTarget();
                 segments[i].transform.position = attachmentPoint.position;
             }
@@ -59,16 +59,37 @@ public class InverseKinematics : MonoBehaviour
         }
 
 
-        if (isAttached)
-        {
-            for (int i = numberOfSegments - 1; i >= 0; i--)
-            {
-                if (i != numberOfSegments - 1)
-                {
+        if (IsAttached) {
+            for (int i = NumberOfSegments - 1; i >= 0; i--) {
+                if (i != NumberOfSegments - 1) {
                     segments[i].transform.position = segments[i + 1].EndPoint();
                 }
             }
         }
+
+        //if (UsingPole) {
+        //    //Get the root of the IK
+        //    Segment root = segments[NumberOfSegments - 1];
+        //    //Get the grabbing segment
+        //    Segment grabber = segments[0];
+
+        //    //Generate normal from root to grabber
+        //    Vector3 normal = grabber.transform.position - root.transform.position;
+
+        //    //Generate plane from normal and position of root
+        //    Plane plane = new Plane(normal, root.transform.position);
+
+        //    //Project pole location onto plane
+        //    Vector3 projectedPole = plane.ClosestPointOnPlane(Pole.position);
+
+        //    //for (int i = NumberOfSegments - 1; i >= 0; i--) {
+        //    //    if (i != NumberOfSegments - 1) {
+        //    //        //Project segment 
+        //    //        float angle = Vector3.SignedAngle()
+        //    //        segments[i].transform.position = segments[i + 1].EndPoint();
+        //    //    }
+        //    //}
+        //}
     }
 }
 

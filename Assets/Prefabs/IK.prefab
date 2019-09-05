@@ -45,14 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1662c35e34d28fb439d7ff7144faad50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSegments: 100
-  segmentLength: 0.1
-  segmentWidth: 0.3
-  Target: {fileID: 6940268163079181777}
+  NumberOfSegments: 50
+  SegmentLength: 0.1
+  SegmentWidth: 0.3
   SegmentPrefab: {fileID: 6385975268497869427, guid: 33d3e4986c6e7704ea3ac53ecab0c44f,
     type: 3}
-  isAttached: 1
+  Target: {fileID: 6940268163079181777}
+  IsAttached: 0
   attachmentPoint: {fileID: 6940268163074433453}
+  UsingPole: 0
+  Pole: {fileID: 0}
 --- !u!1 &6940268163074433452
 GameObject:
   m_ObjectHideFlags: 0
