@@ -14,6 +14,7 @@ public class InverseKinematics : MonoBehaviour
     public Transform attachmentPoint;
     public bool UsingPole;
     public Transform Pole;
+    public bool useGravity;
 
 
     private Segment[] segments;
@@ -37,6 +38,10 @@ public class InverseKinematics : MonoBehaviour
             segments[i] = Instantiate(SegmentPrefab).GetComponent<Segment>();
             segments[i].Thickness = SegmentWidth;
             segments[i].Length = SegmentLength;
+
+            if (useGravity)
+                segments [ i ].gameObject.AddComponent<Rigidbody>().useGravity = true;
+
             if (i == 0)
                 segments[i].Target = Target;
 
