@@ -9,17 +9,10 @@ public class Segment : MonoBehaviour
     public float Angle;
     private Color color;
     public Transform Target;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         transform.localScale = new Vector3(Thickness, Thickness, Length);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.DrawRay(transform.position, transform.position + transform.forward * 10.0f);
     }
 
     public void FollowTarget()
@@ -36,10 +29,4 @@ public class Segment : MonoBehaviour
     {
         return transform.position + transform.forward * Length;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawSphere(EndPoint(), 0.1f);
-    //}
 }
